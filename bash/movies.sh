@@ -8,7 +8,9 @@
 # you can comment out the second theater variables and lines 26-29 if you only want one theater
 # 
 cd /tmp
+theater1name="Regency Buenaventura 6"
 site1="http://www.google.com/movies?hl=en&tid=a8d163eb84d7c0e3"
+theater2name="Regency Janss Marketplace 9"
 site2="http://www.google.com/movies?hl=en&tid=f02917d7d00a9069"
 daysahead1="3"
 daysahead2="2"
@@ -19,14 +21,14 @@ toemail=user@example.com
 emailstring="msmtp -a gmail $fromemail"
 
 echo -e "To: $fromemail\nFrom: $toemail\nSubject: This weeks movies\nMIME-Version: 1.0\nContent-Type: text/html\nContent-Disposition: inline\n" > movies.mail
-echo "Regency Buenaventura 6" >> movies.mail
+echo "<a href="$site1">$theater1name</a><br>" >> movies.mail
 echo "<br>" >> movies.mail
-curl -s -L $siteurl1 | sed 's/<div class=name><a href="/\n<a href="http:\/\/google.com/g' | grep '<a href="http://google.com' | sed 's/[^ ]*<\/a>/&<br><br>\n/' | grep '<a href="http://google.com' >> movies.mail
+curl -s -L $siteurl1 | sed 's/<div class=name><a href="/\n\&nbsp;\&nbsp;\&nbsp;\&nbsp;<a href="http:\/\/google.com/g' | grep '<a href="http://google.com' | sed 's/[^ ]*<\/a>/&<br><br>\n/' | grep '<a href="http://google.com' >> movies.mail
 echo "<br><br>"	>> movies.mail
 echo >> movies.mail
-echo "Regency Janss Marketplace 9" >> movies.mail
+echo "<a href="$site2">$theater2name</a><br>" >> movies.mail
 echo "<br>" >> movies.mail
-curl -s -L $siteurl2 | sed 's/<div class=name><a href="/\n<a href="http:\/\/google.com/g' | grep '<a href="http://google.com' | sed 's/[^ ]*<\/a>/&<br><br>\n/' | grep '<a href="http://google.com' >> movies.mail
+curl -s -L $siteurl2 | sed 's/<div class=name><a href="/\n\&nbsp;\&nbsp;\&nbsp;\&nbsp;<a href="http:\/\/google.com/g' | grep '<a href="http://google.com' | sed 's/[^ ]*<\/a>/&<br><br>\n/' | grep '<a href="http://google.com' >> movies.mail
 echo >> movies.mail
 echo "." >> movies.mail
 cat movies.mail | $emailstring
