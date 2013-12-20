@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 # i run this on monday to email what movies are playing on a particular day at 2 different theaters
 # email won't contain showtimes but link will lead to google page that does.
 # variable daysahead should be at least 0 to show current day movies.
